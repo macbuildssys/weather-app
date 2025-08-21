@@ -1,0 +1,22 @@
+{
+  "name": "weather-app",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "http-server ./ -o -c-1",
+    "dev": "vite --host",
+    "build": "vite build"
+  },
+  "keywords": ["weather", "vue", "bootstrap"],
+  "author": "macbuildssys",
+  "license": "ISC",
+  "description": "A weather app using Vue 3 and Bootstrap, browser-only.",
+  "devDependencies": {
+    "vite": "^4.5.0",
+    "http-server": "^14.1.1"
+  },
+  "dependencies": {
+    "bootstrap": "^5.3.0",
+    "cities.json": "^1.1.50",
+    "vue": "^3.2.0"
+  }
+}
