@@ -41,7 +41,6 @@ A simple and intuitive Weather App that allows you to check current weather cond
    * `-o` automatically opens the app in your default browser.
    * `-c-1` disables caching.
 
-> **Note:** The `cities.json` file is included in the package, so all predefined cities will load automatically.
 
 ## Using the Pre-Built Zip Package
 
