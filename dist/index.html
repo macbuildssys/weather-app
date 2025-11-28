@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>TWA Forecast</title>
+
+  <!-- Bootstrap CSS (CDN) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+
+  <!-- Font Awesome (icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!-- Your styles (note: file is styles.css) -->
+  
+
+  <!-- v-cloak helper (optional visual): ensures content doesn't flash before Vue mounts) -->
+  <style>
+    [v-cloak] { display: none; }
+  </style>
+  <script type="module" crossorigin src="/assets/index-fd519ea8.js"></script>
+  <link rel="stylesheet" href="/assets/index-0bd30905.css">
+</head>
+<body>
+  <div id="app" v-cloak>
+    <div class="image-container">
+      <div class="search-overlay">
+        <div class="d-flex justify-content-center mb-2">
+          <select v-model="source" class="form-select me-2" style="width: auto;">
+            <option value="open-meteo">Open-Meteo</option>
+            <option value="yr-no">Yr.no</option>
+          </select>
+          <input
+            type="text"
+            class="search-input"
+            placeholder="Search for a city or location..."
+            v-model="city"
+            @keyup.enter="handleSearch"
+          >
+        </div>
+      </div>
+
+      <div v-if="loading" class="spinner-border text-primary" role="status" style="z-index:1001;">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+
+      <div v-if="error" class="alert alert-danger">
+        {{ error }}<br>
+        <small>Try another location or check your spelling.</small>
+      </div>
+
+      <div v-if="weatherData" class="weather-container">
+        <div class="weather-card current mb-4">
+          <div class="card p-3 text-center">
+            <h2>{{ weatherData.current.temp }}°C <i :class="getWeatherIcon(weatherData.current.condition)"></i></h2>
+            <p class="lead">{{ weatherData.current.condition }}</p>
+            <p>{{ weatherData.current.date }}</p>
+          </div>
+        </div>
+
+        <div class="weather-card daily mb-4">
+          <div class="row">
+            <div v-for="(day, index) in weatherData.daily" :key="index" class="col-md-2 mb-2">
+              <div class="card p-2 text-center">
+                <h5>{{ day.date }}</h5>
+                <p>{{ day.temp }}°C <i :class="getWeatherIcon(day.condition)"></i></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="weather-card hourly">
+          <div class="hourly-scroll d-flex overflow-auto py-2">
+            <div v-for="(hour, index) in weatherData.hourly" :key="index" class="card me-2 p-2 text-center" style="min-width: 100px;">
+              <p class="mb-1">{{ hour.time }}</p>
+              <p>{{ hour.temp }}°C <i :class="getWeatherIcon(hour.condition)"></i></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scrolling logos at bottom -->
+  <div class="marquee-container">
+    <div class="marquee">
+      <div class="marquee-content">
+        <img src="/assets/open-mateo-a55b1348.jpeg" alt="Open-Meteo" class="marquee-logo" />
+        <img src="/assets/yr.no-bdc43f6e.jpeg" alt="Yr.no" class="marquee-logo" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Vue (global build) - load BEFORE your app.js -->
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+  <!-- Your app code -->
+  
+</body>
+</html>
